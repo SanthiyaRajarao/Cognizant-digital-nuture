@@ -9,18 +9,18 @@ Text Editors and IDEs <br>
 
 
 
-3. VS Code Setup
+3. VS Code Setup <br>
 • Objective: Configure Python in VS Code
 
 <img width="937" height="202" alt="image" src="https://github.com/user-attachments/assets/b858d1a8-00c1-4cb6-8ae6-6bfbffe88978" />
 
 
-5. Float Precision
+5. Float Precision<br>
 • Objective: Handle floating-point arithmetic with functions + validation + formatted
-output.
+output.<br>
 • Task: Calculate net salary after tax and print with 2 decimals.
+<img width="1312" height="108" alt="image" src="https://github.com/user-attachments/assets/895d989d-9ed1-49e7-b4e6-d0e03891469c" />
 
-<img width="860" height="835" alt="image" src="https://github.com/user-attachments/assets/613ba665-3c02-4b92-abd8-640a7ead1eb1" />
 
 Variables
 5. Multiple Assignment
