@@ -22,12 +22,14 @@ output.<br>
 <img width="1312" height="108" alt="image" src="https://github.com/user-attachments/assets/895d989d-9ed1-49e7-b4e6-d0e03891469c" />
 
 
-Variables
-5. Multiple Assignment
-• Objective: Use multiple assignment with basic validation + function + formatted output.
-• Task: Unpack (x, y) coordinates and display them.
 
-<img width="755" height="775" alt="image" src="https://github.com/user-attachments/assets/ec66ca6c-8d74-4879-9cd7-c3c34ace6529" />
+
+Variables
+5. Multiple Assignment<br>
+• Objective: Use multiple assignment with basic validation + function + formatted output.<br>
+• Task: Unpack (x, y) coordinates and display them.
+<img width="1156" height="131" alt="image" src="https://github.com/user-attachments/assets/182aa764-1790-4060-8fa8-6e495016ec4a" />
+
 
 6. Modulo Operator
 • Objective: Use the modulo operator with function + validation + clean output.
