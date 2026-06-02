@@ -1,0 +1,7 @@
+def check_nested():
+    if True:
+        if True:
+            print("Nested")
+
+check_nested()
+print("Confirmation message")
