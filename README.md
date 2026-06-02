@@ -1013,36 +1013,6 @@ expense_tracker()
 <img width="1442" height="291" alt="image" src="https://github.com/user-attachments/assets/e2da9ae7-a13a-4ebc-ad11-b06280c4413c" />
 
 
-## EX 37 : Multiple Instances
-
-## Code:
-```
-class Employee:
-    def __init__(self, name, emp_id):
-        self.name = name
-        self.emp_id = emp_id
-
-    def display(self):
-        return f"Name: {self.name}, ID: {self.emp_id}"
-
-
-def main():
-    emp1 = Employee("Santhiya", 101)
-    emp2 = Employee("Arun", 102)
-    emp3 = Employee("Meena", 103)
-
-    employees = [emp1, emp2, emp3]
-
-    for emp in employees:
-        print(emp.display())
-
-
-main()
-
-```
-## Output:
-<img width="1458" height="169" alt="image" src="https://github.com/user-attachments/assets/755e25ec-9273-47a5-898e-bf190029bce7" />
-
 ## EX 46 : API Response Handler
 
 ## Code:
