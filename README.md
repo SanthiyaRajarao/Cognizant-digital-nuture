@@ -1043,275 +1043,578 @@ main()
 ## Output:
 <img width="1458" height="169" alt="image" src="https://github.com/user-attachments/assets/755e25ec-9273-47a5-898e-bf190029bce7" />
 
-## EX 37 : Multiple Instances
+## EX 46 : API Response Handler
 
 ## Code:
 ```
-class Employee:
-    def __init__(self, name, emp_id):
-        self.name = name
-        self.emp_id = emp_id
+import requests
 
-    def display(self):
-        return f"Name: {self.name}, ID: {self.emp_id}"
+def get_weather(city):
+    try:
+        if city.strip() == "":
+            return "Invalid city name"
+
+        url = f"https://wttr.in/{city}?format=j1"
+
+        response = requests.get(url)
+
+        if response.status_code != 200:
+            return "Error fetching data"
+
+        data = response.json()
+
+        current = data["current_condition"][0]
+
+        temp = current["temp_C"]
+        weather = current["weatherDesc"][0]["value"]
+
+        return f"Temperature: {temp}°C, Condition: {weather}"
+
+    except requests.exceptions.RequestException:
+        return "Network error"
+
+
+print(get_weather("Chennai"))
+
+```
+## Output:
+<img width="1616" height="110" alt="image" src="https://github.com/user-attachments/assets/6f670994-952c-4aa8-a202-b68c53e6cd56" />
+
+
+## EX 47 : Compute Calculator Program
+
+## Code:
+```
+def calculate(a, b, op):
+    try:
+        if op == "+":
+            return a + b
+        elif op == "-":
+            return a - b
+        elif op == "*":
+            return a * b
+        elif op == "/":
+            return a / b
+        else:
+            return "Invalid operator"
+
+    except ZeroDivisionError:
+        return "Cannot divide by zero"
+    except TypeError:
+        return "Invalid input type"
 
 
 def main():
-    emp1 = Employee("Santhiya", 101)
-    emp2 = Employee("Arun", 102)
-    emp3 = Employee("Meena", 103)
+    try:
+        a = float(input("Enter first number: "))
+        b = float(input("Enter second number: "))
+        op = input("Enter operator (+, -, *, /): ")
 
-    employees = [emp1, emp2, emp3]
+        result = calculate(a, b, op)
 
-    for emp in employees:
-        print(emp.display())
+        print("Result:", result)
+
+    except ValueError:
+        print("Invalid number input")
 
 
 main()
 
 ```
 ## Output:
-<img width="1458" height="169" alt="image" src="https://github.com/user-attachments/assets/755e25ec-9273-47a5-898e-bf190029bce7" />
+<img width="1643" height="147" alt="image" src="https://github.com/user-attachments/assets/012ced8b-1f63-4b11-8339-545b48e43bfe" />
 
-## EX 37 : Multiple Instances
+
+## EX 48 : Shopping Cart System
 
 ## Code:
 ```
-class Employee:
-    def __init__(self, name, emp_id):
+class CartItem:
+    def __init__(self, name, price, quantity):
         self.name = name
-        self.emp_id = emp_id
+        self.price = price
+        self.quantity = quantity
 
-    def display(self):
-        return f"Name: {self.name}, ID: {self.emp_id}"
+    def total_price(self):
+        return self.price * self.quantity
+
+
+class ShoppingCart:
+    def __init__(self):
+        self.items = []
+
+    def add_item(self, item):
+        self.items.append(item)
+
+    def remove_item(self, name):
+        self.items = [item for item in self.items if item.name != name]
+
+    def calculate_total(self):
+        total = sum(item.total_price() for item in self.items)
+        gst = total * 0.18
+        final_total = total + gst
+        return total, gst, final_total
+
+    def print_receipt(self):
+        print("\n--- Receipt ---")
+        for item in self.items:
+            print(item.name, "-", item.quantity, "x", item.price, "=", item.total_price())
+
+        total, gst, final_total = self.calculate_total()
+
+        print("\nTotal:", total)
+        print("GST (18%):", gst)
+        print("Final Total:", final_total)
 
 
 def main():
-    emp1 = Employee("Santhiya", 101)
-    emp2 = Employee("Arun", 102)
-    emp3 = Employee("Meena", 103)
+    cart = ShoppingCart()
 
-    employees = [emp1, emp2, emp3]
+    cart.add_item(CartItem("Rice", 50, 2))
+    cart.add_item(CartItem("Milk", 30, 3))
+    cart.add_item(CartItem("Soap", 40, 1))
 
-    for emp in employees:
-        print(emp.display())
+    cart.remove_item("Soap")
+
+    cart.print_receipt()
 
 
 main()
 
 ```
 ## Output:
-<img width="1458" height="169" alt="image" src="https://github.com/user-attachments/assets/755e25ec-9273-47a5-898e-bf190029bce7" />
+<img width="1460" height="314" alt="image" src="https://github.com/user-attachments/assets/ffc6052c-49ad-4d56-aeb2-3e20889b0e0f" />
 
-## EX 37 : Multiple Instances
+
+## EX 49 : Temperature Converter GUI
 
 ## Code:
 ```
-class Employee:
-    def __init__(self, name, emp_id):
-        self.name = name
-        self.emp_id = emp_id
+class TemperatureConverter:
 
-    def display(self):
-        return f"Name: {self.name}, ID: {self.emp_id}"
+    def c_to_f(self, c):
+        return (c * 9/5) + 32
+
+    def f_to_c(self, f):
+        return (f - 32) * 5/9
+
+    def c_to_k(self, c):
+        return c + 273.15
+
+    def k_to_c(self, k):
+        return k - 273.15
 
 
 def main():
-    emp1 = Employee("Santhiya", 101)
-    emp2 = Employee("Arun", 102)
-    emp3 = Employee("Meena", 103)
+    converter = TemperatureConverter()
 
-    employees = [emp1, emp2, emp3]
+    print("\nTemperature Converter")
+    print("1. Celsius to Fahrenheit")
+    print("2. Fahrenheit to Celsius")
+    print("3. Celsius to Kelvin")
+    print("4. Kelvin to Celsius")
 
-    for emp in employees:
-        print(emp.display())
+    choice = input("Enter choice (1-4): ")
+
+    try:
+        temp = float(input("Enter temperature: "))
+
+        if choice == "1":
+            print("Result:", round(converter.c_to_f(temp), 2))
+
+        elif choice == "2":
+            print("Result:", round(converter.f_to_c(temp), 2))
+
+        elif choice == "3":
+            print("Result:", round(converter.c_to_k(temp), 2))
+
+        elif choice == "4":
+            print("Result:", round(converter.k_to_c(temp), 2))
+
+        else:
+            print("Invalid choice")
+
+    except ValueError:
+        print("Invalid temperature input")
 
 
 main()
 
 ```
 ## Output:
-<img width="1458" height="169" alt="image" src="https://github.com/user-attachments/assets/755e25ec-9273-47a5-898e-bf190029bce7" />
+<img width="1454" height="267" alt="image" src="https://github.com/user-attachments/assets/54d45727-7150-42b2-9bb1-3b88e553d7a5" />
 
-## EX 37 : Multiple Instances
+
+## EX 50 : Backup Utility
 
 ## Code:
 ```
-class Employee:
-    def __init__(self, name, emp_id):
-        self.name = name
-        self.emp_id = emp_id
+import shutil
+import os
 
-    def display(self):
-        return f"Name: {self.name}, ID: {self.emp_id}"
+def backup_files(source_files, backup_folder):
+    copied_files = set()
+
+    if not os.path.exists(backup_folder):
+        os.makedirs(backup_folder)
+
+    log_file = open("backup.log", "a")
+
+    for file in source_files:
+        try:
+            if file in copied_files:
+                log_file.write(f"SKIPPED (duplicate): {file}\n")
+                continue
+
+            if not os.path.exists(file):
+                log_file.write(f"NOT FOUND: {file}\n")
+                continue
+
+            destination = os.path.join(backup_folder, os.path.basename(file))
+            shutil.copy(file, destination)
+
+            copied_files.add(file)
+            log_file.write(f"COPIED: {file} -> {destination}\n")
+
+        except PermissionError:
+            log_file.write(f"PERMISSION ERROR: {file}\n")
+        except Exception as e:
+            log_file.write(f"ERROR: {file} -> {e}\n")
+
+    log_file.close()
+    print("Backup completed. Check backup.log")
+
+files = input("Enter file names separated by space: ").split()
+backup_folder = "backup"
+
+backup_files(files, backup_folder)
+
+```
+## Output:
+<img width="1459" height="141" alt="image" src="https://github.com/user-attachments/assets/62919d79-4fac-4640-9c6d-0c87af3bbacf" />
+
+
+## EX 51 : URL Shortener
+
+## Code:
+```
+import hashlib
+
+class URLShortener:
+    def __init__(self):
+        self.url_map = {}
+
+    def _generate_short_code(self, url):
+        hash_object = hashlib.md5(url.encode())
+        return hash_object.hexdigest()[:6]
+
+    def shorten_url(self, url):
+        if not url:
+            return "Invalid URL"
+
+        short_code = self._generate_short_code(url)
+        self.url_map[short_code] = url
+
+        return short_code
+
+    def get_original_url(self, short_code):
+        return self.url_map.get(short_code, "URL not found")
 
 
 def main():
-    emp1 = Employee("Santhiya", 101)
-    emp2 = Employee("Arun", 102)
-    emp3 = Employee("Meena", 103)
+    shortener = URLShortener()
 
-    employees = [emp1, emp2, emp3]
+    url = "https://www.google.com"
+    short_code = shortener.shorten_url(url)
 
-    for emp in employees:
-        print(emp.display())
+    print("Short URL code:", short_code)
+    print("Original URL:", shortener.get_original_url(short_code))
 
 
 main()
 
 ```
 ## Output:
-<img width="1458" height="169" alt="image" src="https://github.com/user-attachments/assets/755e25ec-9273-47a5-898e-bf190029bce7" />
+<img width="1464" height="153" alt="image" src="https://github.com/user-attachments/assets/e9a33c1c-4b9a-4e65-beac-595d015e0703" />
 
-## EX 37 : Multiple Instances
+
+## EX 52 : Gradebook System 
 
 ## Code:
 ```
-class Employee:
-    def __init__(self, name, emp_id):
-        self.name = name
-        self.emp_id = emp_id
+import json
+def calculate_gpa(grades):
+    if not grades:
+        return 0
 
-    def display(self):
-        return f"Name: {self.name}, ID: {self.emp_id}"
+    return sum(grades) / len(grades)
+
+
+def add_student_grade(data, name, grade):
+    if name not in data:
+        data[name] = []
+
+    if 0 <= grade <= 100:
+        data[name].append(grade)
+    else:
+        print("Invalid grade ignored")
+
+
+def class_average(data):
+    all_grades = []
+
+    for grades in data.values():
+        all_grades.extend(grades)
+
+    if not all_grades:
+        return 0
+
+    return sum(all_grades) / len(all_grades)
+
+
+def save_data(data, filename="grades.json"):
+    with open(filename, "w") as file:
+        json.dump(data, file)
+
+
+def load_data(filename="grades.json"):
+    try:
+        with open(filename, "r") as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return {}
 
 
 def main():
-    emp1 = Employee("Santhiya", 101)
-    emp2 = Employee("Arun", 102)
-    emp3 = Employee("Meena", 103)
+    students = load_data()
 
-    employees = [emp1, emp2, emp3]
+    add_student_grade(students, "Santhiya", 85)
+    add_student_grade(students, "Hycinth", 90)
+    add_student_grade(students, "Roshini", 78)
 
-    for emp in employees:
-        print(emp.display())
+    print("GPA Santhiya:", calculate_gpa(students["Santhiya"]))
+    print("Class Average:", class_average(students))
+
+    save_data(students)
 
 
 main()
 
 ```
 ## Output:
-<img width="1458" height="169" alt="image" src="https://github.com/user-attachments/assets/755e25ec-9273-47a5-898e-bf190029bce7" />
+<img width="1448" height="116" alt="image" src="https://github.com/user-attachments/assets/1fc16f44-624f-4b2e-93a5-32b4ad543279" />
 
-## EX 37 : Multiple Instances
+
+## EX 53 : Task Scheduler
 
 ## Code:
 ```
-class Employee:
-    def __init__(self, name, emp_id):
-        self.name = name
-        self.emp_id = emp_id
+from datetime import datetime
 
-    def display(self):
-        return f"Name: {self.name}, ID: {self.emp_id}"
+class Task:
+    def __init__(self, name, due_date, priority):
+        self.name = name
+        self.due_date = datetime.strptime(due_date, "%Y-%m-%d")
+        self.priority = priority
+
+    def is_overdue(self):
+        return self.due_date < datetime.now()
+
+
+class TaskScheduler:
+    def __init__(self):
+        self.tasks = []
+
+    def add_task(self, task):
+        self.tasks.append(task)
+
+    def get_sorted_tasks(self):
+        return sorted(self.tasks, key=lambda t: t.due_date)
+
+    def get_overdue_tasks(self):
+        return [t for t in self.tasks if t.is_overdue()]
+
+    def display_tasks(self):
+        print("\n--- Task List ---")
+        for task in self.get_sorted_tasks():
+            status = "Overdue" if task.is_overdue() else "Pending"
+            print(task.name, "-", task.due_date.date(), "-", task.priority, "-", status)
 
 
 def main():
-    emp1 = Employee("Santhiya", 101)
-    emp2 = Employee("Arun", 102)
-    emp3 = Employee("Meena", 103)
+    scheduler = TaskScheduler()
 
-    employees = [emp1, emp2, emp3]
+    scheduler.add_task(Task("Finish Project", "2026-05-20", "High"))
+    scheduler.add_task(Task("Study SQL", "2026-06-05", "Medium"))
+    scheduler.add_task(Task("Practice Python", "2026-05-10", "High"))
 
-    for emp in employees:
-        print(emp.display())
+    scheduler.display_tasks()
+
+    print("\nOverdue Tasks:")
+    for task in scheduler.get_overdue_tasks():
+        print(task.name)
 
 
 main()
 
 ```
 ## Output:
-<img width="1458" height="169" alt="image" src="https://github.com/user-attachments/assets/755e25ec-9273-47a5-898e-bf190029bce7" />
+<img width="1452" height="240" alt="image" src="https://github.com/user-attachments/assets/1f99a778-a708-4930-82ec-773087c1aa51" />
 
-## EX 37 : Multiple Instances
+
+
+
+## EX 54 : Inventory Manager
 
 ## Code:
 ```
-class Employee:
-    def __init__(self, name, emp_id):
+class Product:
+    def __init__(self, name, price, stock):
         self.name = name
-        self.emp_id = emp_id
+        self.price = price
+        self.stock = stock
 
     def display(self):
-        return f"Name: {self.name}, ID: {self.emp_id}"
+        return f"{self.name} | Price: {self.price} | Stock: {self.stock}"
+
+
+class Perishable(Product):
+    def __init__(self, name, price, stock, expiry_date):
+        super().__init__(name, price, stock)
+        self.expiry_date = expiry_date
+
+
+class Electronics(Product):
+    def __init__(self, name, price, stock, warranty_years):
+        super().__init__(name, price, stock)
+        self.warranty_years = warranty_years
+
+
+class InventoryManager:
+    def __init__(self):
+        self.products = {}
+        self.low_stock_alert = set()
+
+    def add_product(self, product):
+        self.products[product.name] = product
+
+        if product.stock < 5:
+            self.low_stock_alert.add(product.name)
+
+    def update_stock(self, name, new_stock):
+        if name in self.products:
+            self.products[name].stock = new_stock
+
+            if new_stock < 5:
+                self.low_stock_alert.add(name)
+            elif name in self.low_stock_alert:
+                self.low_stock_alert.remove(name)
+
+    def show_inventory(self):
+        print("\n--- Inventory ---")
+        for product in self.products.values():
+            print(product.display())
+
+    def show_low_stock(self):
+        print("\n--- Low Stock Items ---")
+        for item in self.low_stock_alert:
+            print(item)
 
 
 def main():
-    emp1 = Employee("Santhiya", 101)
-    emp2 = Employee("Arun", 102)
-    emp3 = Employee("Meena", 103)
+    manager = InventoryManager()
 
-    employees = [emp1, emp2, emp3]
+    p1 = Perishable("Milk", 50, 3, "2026-06-10")
+    p2 = Electronics("Phone", 15000, 10, 2)
+    p3 = Product("Book", 200, 2)
 
-    for emp in employees:
-        print(emp.display())
+    manager.add_product(p1)
+    manager.add_product(p2)
+    manager.add_product(p3)
+
+    manager.show_inventory()
+    manager.show_low_stock()
+
+    manager.update_stock("Phone", 3)
+
+    print("\nAfter Update:")
+    manager.show_inventory()
+    manager.show_low_stock()
 
 
 main()
 
 ```
 ## Output:
-<img width="1458" height="169" alt="image" src="https://github.com/user-attachments/assets/755e25ec-9273-47a5-898e-bf190029bce7" />
+<img width="1472" height="510" alt="image" src="https://github.com/user-attachments/assets/fb48a2c4-b760-4c3a-93a4-d5aeca610734" />
 
-## EX 37 : Multiple Instances
+
+## EX 55 : Budget Planner
 
 ## Code:
 ```
-class Employee:
-    def __init__(self, name, emp_id):
-        self.name = name
-        self.emp_id = emp_id
+import matplotlib.pyplot as plt
 
-    def display(self):
-        return f"Name: {self.name}, ID: {self.emp_id}"
+class Category:
+    def __init__(self, name, limit):
+        self.name = name
+        self.limit = limit
+        self.spent = 0
+
+    def add_expense(self, amount):
+        if amount <= 0:
+            return "Invalid amount"
+        self.spent += amount
+
+    def status(self):
+        if self.spent > self.limit:
+            return f"{self.name}: Budget exceeded!"
+        return f"{self.name}: Within budget"
+
+
+class BudgetPlanner:
+    def __init__(self):
+        self.categories = []
+
+    def add_category(self, category):
+        self.categories.append(category)
+
+    def show_status(self):
+        print("\n--- Budget Status ---")
+        for c in self.categories:
+            print(c.status())
+
+    def show_chart(self):
+        names = [c.name for c in self.categories]
+        spent = [c.spent for c in self.categories]
+
+        plt.pie(spent, labels=names, autopct="%1.1f%%")
+        plt.title("Monthly Budget Distribution")
+        plt.show()
 
 
 def main():
-    emp1 = Employee("Santhiya", 101)
-    emp2 = Employee("Arun", 102)
-    emp3 = Employee("Meena", 103)
+    planner = BudgetPlanner()
 
-    employees = [emp1, emp2, emp3]
+    food = Category("Food", 5000)
+    travel = Category("Travel", 3000)
+    shopping = Category("Shopping", 4000)
 
-    for emp in employees:
-        print(emp.display())
+    food.add_expense(4500)
+    travel.add_expense(3500)
+    shopping.add_expense(2000)
+
+    planner.add_category(food)
+    planner.add_category(travel)
+    planner.add_category(shopping)
+
+    planner.show_status()
+    planner.show_chart()
 
 
 main()
 
 ```
 ## Output:
-<img width="1458" height="169" alt="image" src="https://github.com/user-attachments/assets/755e25ec-9273-47a5-898e-bf190029bce7" />
-
-## EX 37 : Multiple Instances
-
-## Code:
-```
-class Employee:
-    def __init__(self, name, emp_id):
-        self.name = name
-        self.emp_id = emp_id
-
-    def display(self):
-        return f"Name: {self.name}, ID: {self.emp_id}"
-
-
-def main():
-    emp1 = Employee("Santhiya", 101)
-    emp2 = Employee("Arun", 102)
-    emp3 = Employee("Meena", 103)
-
-    employees = [emp1, emp2, emp3]
-
-    for emp in employees:
-        print(emp.display())
-
-
-main()
-
-```
-## Output:
-<img width="1458" height="169" alt="image" src="https://github.com/user-attachments/assets/755e25ec-9273-47a5-898e-bf190029bce7" />
-
-
+<img width="1452" height="499" alt="image" src="https://github.com/user-attachments/assets/00b1cb11-cc10-475c-902e-ba2d2c7e7762" />
 
