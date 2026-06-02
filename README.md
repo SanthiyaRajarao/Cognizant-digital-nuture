@@ -1,36 +1,36 @@
 # Cognizant-digital-nuture
 
-## EX:01:Simple Hello World 
-## code:
+## EX 01:Simple Hello World 
+## Code:
 ```
 print("Hello World!")
 ```
-## output:
+## Output:
 <img width="1613" height="216" alt="Screenshot 2026-05-29 095920" src="https://github.com/user-attachments/assets/a57501d2-631e-4e79-9de8-6131dfd87e43" />
 
 
 
-## EX:02:Jupyter Notebook 
-## code:
+## EX 02:Jupyter Notebook 
+## Code:
 ```
 print("Ny First Notebook")
 
 ```
-## output:
+## Output:
 <img width="1500" height="365" alt="Screenshot 2026-05-29 101756" src="https://github.com/user-attachments/assets/a061902c-d39a-427a-b656-9e8d1c0da25c" />
 
 
-## EX:03:VS Code Setup 
-## code:
+## EX 03:VS Code Setup 
+## Code:
 ```
 print("Hello World")
 ```
-## output:
+## Output:
 
 <img width="1613" height="163" alt="image" src="https://github.com/user-attachments/assets/2b59086a-1eaf-4b8b-a428-9f6b038bf316" />
 
-## EX:04:Float Precision 
-## code:
+## EX 04:Float Precision 
+## Code:
 ```
 def net_salary(salary, tax_rate):
     if salary < 0:
@@ -51,12 +51,12 @@ net_salary(salary, tax)
 
 
 ```
-## output:
+## Output:
 <img width="1455" height="111" alt="image" src="https://github.com/user-attachments/assets/fd5893c4-53df-4d5f-9868-24e1e11b96f0" />
 
 
-## EX:05:Multiple Assignment
-## code:
+## EX 05:Multiple Assignment
+## Code:
 ```
 def coord(coordinates):
     if len(coordinates) != 2: 
@@ -72,12 +72,12 @@ pt2 = float(input("Enter the second coordinate: "))
 coord([pt1, pt2])
 
 ```
-## output:
+## Output:
 <img width="504" height="202" alt="image" src="https://github.com/user-attachments/assets/5c096feb-79ee-41d5-8b25-219118561ea8" />
 
 
-## EX:06:Modulo Operator 
-## code:
+## EX 06:Modulo Operator 
+## Code:
 ```
 num = int(input("Enter a number: "))
 
@@ -86,12 +86,12 @@ if num % 2 == 0:
 else:
     print("Odd number")
 ```
-## output:
+## Output:
 <img width="1465" height="161" alt="image" src="https://github.com/user-attachments/assets/ee91fea3-bc5a-4b34-b29e-f2758c1246de" />
 
 
-## EX:07:Floor Division
-## code:
+## EX 07:Floor Division
+## Code:
 ```
 def floordivision(bill,people):
     share=bill//people
@@ -105,12 +105,12 @@ floordivision(bill,people)
 
 
 ```
-## output: 
+## Output: 
 <img width="1438" height="154" alt="image" src="https://github.com/user-attachments/assets/0de61fc1-f58a-46eb-909a-13dc37ce4ee7" />
 
 
-## EX:08: MIN MAX
-## code:
+## EX 08: MIN MAX
+## Code:
 ```
 def minmax(salary):
     minimum=min(salary)
@@ -122,12 +122,12 @@ salary = list(map(int, input("Enter the salary: ").split()))
 minmax(salary)
 
 ```
-## output:
+## Output:
 <img width="1449" height="111" alt="image" src="https://github.com/user-attachments/assets/e87a9117-eced-43af-951b-d908756ef64d" />
 
 
-## EX:09: User Input
-## code:
+## EX 09: User Input
+## Code:
 ```
 def user(name):
     print(name ,", Have a great day")
@@ -135,13 +135,13 @@ def user(name):
 name=input("Enter your name:")
 user(name)
 ```
-## output:
+## Output:
 <img width="1447" height="89" alt="image" src="https://github.com/user-attachments/assets/8aaca5ed-865e-4e84-9b2d-eeb494d8c631" />
 
 
 
-## EX:10 : Numeric Input
-## code:
+## EX 10 : Numeric Input
+## Code:
 ```
 def numeric():
     age=int(input("Enter you age: "))
@@ -149,12 +149,12 @@ def numeric():
 
 numeric()
 ```
-## output:
+## Output:
 <img width="1452" height="86" alt="image" src="https://github.com/user-attachments/assets/44f74a97-b28e-489f-987d-ca75a6d4943d" />
 
 
-## EX:11 : Float Input
-## code:
+## EX 11 : Float Input
+## Code:
 ```
 def weight():
     wt=float(input("Enter the weight in kg: "))
@@ -164,13 +164,13 @@ def weight():
 
 weight()
 ```
-## output:
+## Output:
 <img width="1461" height="120" alt="image" src="https://github.com/user-attachments/assets/3669e354-7fc8-4f12-892b-36eaf2862c35" />
 
 
-## EX:12 : Simple if
+## EX 12 : Simple if
 
-## code:
+## Code:
 ```
 def num():
     x=int(input("Enter a number:"))
@@ -181,12 +181,12 @@ def num():
 
 num()
 ```
-## output:
+## Output:
 <img width="1452" height="98" alt="image" src="https://github.com/user-attachments/assets/00ea80e9-8560-46f4-8f7f-a04278d163a5" />
 
 
-## EX:13 : If-else
-## code:
+## EX 13 : If-else
+## Code:
 ```
 def condition(marks):
     if(marks<50):
@@ -197,11 +197,11 @@ def condition(marks):
 marks=int(input("Enter the mark obtained: "))
 condition(marks)
 ```
-## output:
+## Output:
 <img width="1445" height="86" alt="image" src="https://github.com/user-attachments/assets/12d91135-32c7-439f-8eb1-2a0c312de8e9" />
 
-## EX:14 : If-Elif-Else
-## code:
+## EX 14 : If-Elif-Else
+## Code:
 ```
 def grade():
     marks=int(input("Enter the mark obtained"))
@@ -214,11 +214,11 @@ def grade():
 
 grade()
 ```
-## output:
+## Output:
 <img width="1446" height="91" alt="image" src="https://github.com/user-attachments/assets/58a8279c-c462-4dd1-ad2d-b750a71c26ad" />
 
-## EX:15 : Nested If
-## code:
+## EX 15 : Nested If
+## Code:
 ```
 def login(user, pwd):
     if user.strip() == "" or pwd.strip() == "":
@@ -237,12 +237,12 @@ pwd = input("Enter password: ")
 login(user, pwd)
 
 ```
-## output:
+## Output:
 <img width="1461" height="151" alt="image" src="https://github.com/user-attachments/assets/ae90c7cd-32f3-46c2-9e8d-4a0f6a6acd51" />
 
 
-## EX:16 : For Loop
-## code:
+## EX 16 : For Loop
+## Code:
 ```
 def forloop():
     num=int(input("Enter a number: "))
@@ -251,12 +251,12 @@ def forloop():
 
 forloop()
 ```
-## output:
+## Output:
 <img width="1458" height="91" alt="image" src="https://github.com/user-attachments/assets/871b44d0-952a-4a22-8cee-4fd6a94f9ab4" />
 
 
-## EX:17 : While Loop
-## code:
+## EX 17 : While Loop
+## Code:
 ```
 def iter():
     num=int(input("Enter a number: "))
@@ -265,12 +265,12 @@ def iter():
         num-=1
 iter()
 ```
-## output:
+## Output:
 <img width="1447" height="178" alt="image" src="https://github.com/user-attachments/assets/713bc141-6316-4098-b494-eeddcf617b55" />
 
 
-## EX:18 : Break
-## code:
+## EX 18 : Break
+## Code:
 ```
 def first_even(start, end):
     if start > end:
@@ -290,12 +290,12 @@ end = int(input("Enter end of range: "))
 first_even(start, end)
 
 ```
-## output:
+## Output:
 <img width="1447" height="114" alt="image" src="https://github.com/user-attachments/assets/0101d995-e419-42b0-b66b-d90f29059ec1" />
 
 ## EX 19 : Continue
 
-## code:
+## Code:
 ```
 def first_even(start, end):
     if start > end:
@@ -313,12 +313,12 @@ end = int(input("Enter end of range: "))
 
 first_even(start, end)
 ```
-## output:
+## Output:
 <img width="1440" height="118" alt="image" src="https://github.com/user-attachments/assets/1fc3073b-55a1-45cd-9613-0e83fbb12e52" />
 
 ## EX 20 : Pass
 
-## code:
+## Code:
 ```
 def empty_function():
     pass
@@ -326,12 +326,12 @@ def empty_function():
 empty_function()
 print("Function defined")
 ```
-## output:
+## Output:
 <img width="1450" height="93" alt="image" src="https://github.com/user-attachments/assets/b10b472b-0db3-4461-b5c9-558a5d980e7c" />
 
 ## EX 21 : Consistent Indentation
 
-## code:
+## Code:
 ```
 def check_nested():
     if True:
@@ -341,12 +341,12 @@ def check_nested():
 check_nested()
 print("Confirmation message")
 ```
-## output:
+## Output:
 <img width="1456" height="98" alt="image" src="https://github.com/user-attachments/assets/9ab57df8-f8f9-4c07-9cff-54ec2a95baf3" />
 
 ## EX 22 : Comment Usage
 
-## code:
+## Code:
 ```
 def calculate_salary():
     base_salary = int(input("Enter base salary: "))
@@ -356,8 +356,962 @@ def calculate_salary():
 
 calculate_salary()
 ```
-## output:
+## Output:
 <img width="1461" height="149" alt="image" src="https://github.com/user-attachments/assets/17ce1751-03c5-4d1a-ba87-ee1a7180c5c4" />
+
+## EX 23 : Import Standard Module
+
+## Code:
+```
+import math
+
+def calc():
+    radius=float(input("Enter the radius: "))
+    area=math.pi*(radius**2)
+    print(f"{area:.2f}")
+
+calc()
+```
+## Output:
+<img width="1460" height="87" alt="image" src="https://github.com/user-attachments/assets/832becbd-123d-4e71-a22e-7738fb3763c5" />
+
+
+## EX 24 : All Import
+
+## Code:
+```
+from math import *
+
+def square():
+    num=int(input("Enter the number"))
+    print(sqrt(num))
+
+square()
+```
+## Output:
+<img width="1449" height="146" alt="image" src="https://github.com/user-attachments/assets/3fa89bee-883c-410c-bd23-d2b73372d2b4" />
+
+
+## EX 25 : Parameters
+
+## Code:
+```
+def add(a,b):
+    res=a+b
+    return res
+
+a=int(input("Enter the first number: "))
+b=int(input("Enter the second number: "))
+res=add(a,b)
+print("The sum of two numbers is :",res)
+```
+## Output:
+<img width="1466" height="137" alt="image" src="https://github.com/user-attachments/assets/27c0838d-8342-4734-a4fa-8b45bb7e49e8" />
+
+
+## EX 26 : Multiple Parameters
+
+## Code:
+```
+def area(length,breadth):
+    res=length*breadth
+    return res
+
+length=int(input("Enter length: "))
+breadth=int(input("Enter breadth: "))
+res=area(length,breadth)
+print("The sum of two numbers is :",res)
+```
+## Output:
+<img width="1453" height="124" alt="image" src="https://github.com/user-attachments/assets/a272e002-2acd-4951-bdb6-432015a4ffba" />
+
+## EX 27 : Len Function
+
+## Code:
+```
+def length(text):
+    print(len(text))
+
+text=input("Enter the text")
+length(text)
+```
+## Output:
+<img width="1456" height="145" alt="image" src="https://github.com/user-attachments/assets/a208f0bf-813a-42eb-af69-616273f54c85" />
+
+## EX 28 : Write to File
+
+## Code:
+```
+def write_to_file():
+    file = open("message.txt", "w")
+    file.write("Hello World")
+    file.close()
+    print("File written successfully")
+
+write_to_file()
+```
+## Output:
+<img width="1452" height="120" alt="image" src="https://github.com/user-attachments/assets/ae10a0aa-6d76-498b-9b48-1ab8dc14eb28" />
+
+## EX 29 : Read from File
+
+## Code:
+```
+def read_file():
+    file = open("message.txt", "r")
+    content = file.read()
+    file.close()
+    print("File Content:")
+    print(content)
+
+read_file()
+```
+## Output:
+<img width="1455" height="167" alt="image" src="https://github.com/user-attachments/assets/3ce41407-6ee1-412c-82fb-c8f008dc3689" />
+
+## EX 30 : Basic Try Except
+
+## Code:
+```
+def safe_divide(a, b):
+    try:
+        result = a / b
+        print(f"Result: {result:.2f}")
+    except ZeroDivisionError:
+        print("Error: Division by zero is not allowed.")
+
+x = float(input("Enter numerator: "))
+y = float(input("Enter denominator: "))
+safe_divide(x, y)
+
+```
+## Output:
+<img width="1460" height="160" alt="image" src="https://github.com/user-attachments/assets/e005a51c-58e5-45e6-99dd-a89a2f456bdb" />
+
+## EX 31 : Create List
+
+## Code:
+```
+def show_cart():
+    cart = []
+    n = int(input("Enter number of items: "))
+    for i in range(n):
+        item = int(input(f"Enter item {i+1}: "))
+        cart.append(item)
+    if len(cart) == 0:
+        print("Cart is empty")
+        return
+    print("Shopping Cart Items:")
+    for item in cart:
+        print(item)
+
+show_cart()
+
+```
+## Output:
+<img width="1451" height="208" alt="image" src="https://github.com/user-attachments/assets/1759b5ab-d71c-4483-a061-9319cdb78259" />
+
+
+## EX 32 : Append to List
+
+## Code:
+```
+def add_expense():
+    expenses = [100, 200, 150]
+    print("Expenses before adding:", expenses)
+    new_expense = int(input("Enter new expense amount: "))
+    if new_expense <= 0:
+        print("Invalid expense amount")
+        return
+    expenses.append(new_expense)
+    print("Updated Expenses List:")
+    for expense in expenses:
+        print(expense)
+add_expense()
+
+```
+## Output:
+<img width="1459" height="259" alt="image" src="https://github.com/user-attachments/assets/f7d76e33-fda5-4fc6-874b-f6b57508c005" />
+
+
+## EX 33 : Update Dictionary
+
+## Code:
+```
+def update_employee():
+    emp1 = {"id": 101, "name": "John", "salary": 30000}
+    emp2 = {"dept": "IT", "location": "Chennai"}
+
+    if not isinstance(emp1, dict) or not isinstance(emp2, dict):
+        print("Invalid input")
+        return
+
+    emp1.update(emp2)
+
+    print("Updated Employee Data:")
+    for key, value in emp1.items():
+        print(key, ":", value)
+
+update_employee()
+
+```
+## Output:
+<img width="1444" height="220" alt="image" src="https://github.com/user-attachments/assets/f4b4c4d5-a4e6-49f8-bd8b-9c118ac56e92" />
+
+
+## EX 34 : Nested Dictionary
+
+## Code:
+```
+def get_salary(dept, emp_name):
+    employees = {
+        "AI": {
+            "Santhiya": 60000,
+            "Arun": 55000
+        },
+        "IT": {
+            "Kiran": 70000,
+            "Meena": 65000
+        }
+    }
+    if dept not in employees:
+        return "Department not found"
+    if emp_name not in employees[dept]:
+        return "Employee not found"
+    return employees[dept][emp_name]
+print(get_salary("AI", "Santhiya"))
+```
+## Output:
+<img width="1449" height="130" alt="image" src="https://github.com/user-attachments/assets/9ee1facf-98c8-4db3-9af1-b89e1243c8d0" />
+
+
+## EX 35 : Create Tuple
+
+## Code:
+```
+def get_coordinates():
+    x = float(input("Enter x coordinate: "))
+    y = float(input("Enter y coordinate: "))
+
+    coordinates = (x, y)
+    if len(coordinates) != 2:
+        return "Invalid coordinates"
+    print("Coordinates:", coordinates)
+
+get_coordinates()
+
+```
+## Output:
+<img width="1458" height="191" alt="image" src="https://github.com/user-attachments/assets/98e6e874-a9b3-4dfb-ab99-fa1c0d8b8a67" />
+
+
+## EX 36 : Set Intersection
+
+## Code:
+```
+def common_elements():
+    set1 = set()
+    set2 = set()
+    n1 = int(input("Enter number of elements in set1: "))
+    for i in range(n1):
+        set1.add(int(input("Enter element for set1: ")))
+    n2 = int(input("Enter number of elements in set2: "))
+    for i in range(n2):
+        set2.add(int(input("Enter element for set2: ")))
+    common = set1 & set2
+    print("Set1:", set1)
+    print("Set2:", set2)
+    print("Common elements:", common)
+
+common_elements()
+```
+## Output:
+<img width="1458" height="344" alt="image" src="https://github.com/user-attachments/assets/2cd28707-3662-42a2-98a8-6a8902dd240d" />
+
+
+## EX 37 : Multiple Instances
+
+## Code:
+```
+class Employee:
+    def __init__(self, name, emp_id):
+        self.name = name
+        self.emp_id = emp_id
+
+    def display(self):
+        return f"Name: {self.name}, ID: {self.emp_id}"
+
+
+def main():
+    emp1 = Employee("Santhiya", 101)
+    emp2 = Employee("Arun", 102)
+    emp3 = Employee("Meena", 103)
+
+    employees = [emp1, emp2, emp3]
+
+    for emp in employees:
+        print(emp.display())
+
+
+main()
+
+```
+## Output:
+<img width="1458" height="169" alt="image" src="https://github.com/user-attachments/assets/755e25ec-9273-47a5-898e-bf190029bce7" />
+
+
+## EX 38 : Method Chaining
+
+## Code:
+```
+class Employee:
+    def __init__(self, name):
+        self.name = name
+        self.salary = 0
+
+    def set_salary(self, salary):
+        if salary <= 0:
+            self.salary = 0
+        else:
+            self.salary = salary
+        return self
+
+    def apply_raise(self, percent):
+        if percent < 0:
+            percent = 0
+        self.salary += self.salary * (percent / 100)
+        return self
+
+    def display(self):
+        print("Employee:", self.name)
+        print("Final Salary:", self.salary)
+        return self
+
+
+def main():
+    emp = Employee("Santhiya")
+    emp.set_salary(50000).apply_raise(10).display()
+
+
+main()
+
+```
+## Output:
+<img width="1448" height="143" alt="image" src="https://github.com/user-attachments/assets/6519ac85-078c-470f-aa13-09849cdb525f" />
+
+
+## EX 39 : Polymorphism
+
+## Code:
+```
+class Employee:
+    def work(self):
+        print("Employee is working")
+
+
+class Developer(Employee):
+    def work(self):
+        print("Developer writes code")
+
+
+class Tester(Employee):
+    def work(self):
+        print("Tester tests the application")
+
+
+def main():
+    employees = [Developer(), Tester(), Employee()]
+
+    for emp in employees:
+        emp.work()
+
+
+main()
+
+```
+## Output:
+<img width="1452" height="210" alt="image" src="https://github.com/user-attachments/assets/2f672f3c-1bdc-4313-9f42-d870343ab491" />
+
+
+## EX 40 :Class Methods
+
+## Code:
+```
+class Employee:
+    def __init__(self, name, salary):
+        self.name = name
+        self.salary = salary
+
+    def display(self):
+        return f"Name: {self.name}, Salary: {self.salary}"
+
+    @classmethod
+    def from_string(cls, data):
+        name, salary = data.split(",")
+
+        if not salary.isdigit():
+            return "Invalid salary"
+
+        return cls(name, int(salary))
+
+
+def main():
+    emp = Employee.from_string("Santhiya,75000")
+    print(emp.display())
+
+
+main()
+```
+## Output:
+<img width="1465" height="205" alt="image" src="https://github.com/user-attachments/assets/65cfba7b-c5cb-43ae-a9be-21d3beb4faa3" />
+
+
+## EX 41 : Employee Management System
+
+## Code:
+```
+import json
+class Employee:
+    def __init__(self, emp_id, name, salary):
+        self.emp_id = emp_id
+        self.name = name
+        self.salary = salary
+
+    def to_dict(self):
+        return {
+            "id": self.emp_id,
+            "name": self.name,
+            "salary": self.salary
+        }
+def save_employees(emp_list):
+    data = {}
+
+    for emp in emp_list:
+        data[emp.emp_id] = emp.to_dict()
+
+    with open("emps.json", "w") as file:
+        json.dump(data, file)
+
+    return "Data saved successfully"
+
+
+def load_employees():
+    try:
+        with open("emps.json", "r") as file:
+            data = json.load(file)
+        return data
+    except FileNotFoundError:
+        return "No file found"
+
+
+def main():
+    e1 = Employee(101, "Santhiya", 60000)
+    e2 = Employee(102, "Hycinth", 55000)
+
+    employees = [e1, e2]
+
+    print(save_employees(employees))
+    print(load_employees())
+
+
+main()
+
+```
+## Output:
+<img width="1448" height="154" alt="image" src="https://github.com/user-attachments/assets/20e14705-ef78-482c-a63b-29a252b0f28f" />
+
+
+## EX 42 : Data Analysis Pipeline
+
+## Code:
+```
+import statistics
+
+def process_sales():
+    try:
+        file = open("sales.txt", "r")
+        data = file.read().split()
+        file.close()
+
+        sales = []
+
+        for value in data:
+            try:
+                sales.append(float(value))
+            except ValueError:
+                print("Skipping invalid data:", value)
+
+        if len(sales) == 0:
+            print("No valid sales data found")
+            return
+
+        mean_value = statistics.mean(sales)
+        median_value = statistics.median(sales)
+
+        print("Sales Data:", sales)
+        print("Mean:", mean_value)
+        print("Median:", median_value)
+
+    except FileNotFoundError:
+        print("File not found: sales.txt")
+    except Exception as e:
+        print("Error occurred:", e)
+
+process_sales()
+
+```
+## Output:
+<img width="1443" height="165" alt="image" src="https://github.com/user-attachments/assets/e3174060-4376-4cc2-8433-99d6b80233a2" />
+
+
+## EX 43 : Configuration Manager
+
+## Code:
+```
+import configparser
+
+class Config:
+    def __init__(self, file_path):
+        self.file_path = file_path
+        self.config = configparser.ConfigParser()
+
+    def load_config(self):
+        self.config.read(self.file_path)
+        return self.config
+
+
+class DatabaseConfig(Config):
+    def __init__(self, file_path):
+        super().__init__(file_path)
+        self.settings = {}
+
+    def validate_keys(self):
+        required_keys = ["host", "port", "username", "password", "dbname"]
+
+        if "database" not in self.config:
+            print("Missing [database] section")
+            return False
+
+        for key in required_keys:
+            if key not in self.config["database"]:
+                print("Missing key:", key)
+                return False
+
+        return True
+
+    def get_settings(self):
+        if not self.validate_keys():
+            return None
+
+        self.settings = dict(self.config["database"])
+        return self.settings
+
+
+config = DatabaseConfig("db.ini")
+config.load_config()
+
+settings = config.get_settings()
+
+print("Database Settings:")
+print(settings)
+
+```
+## Output:
+<img width="1451" height="147" alt="image" src="https://github.com/user-attachments/assets/284a23cd-50c9-400d-bc52-090b5094105c" />
+
+
+## EX 44 : CSV Data Processor
+
+## Code:
+```
+import csv
+
+def process_csv():
+    try:
+        with open("employees.csv", "r") as file:
+            reader = csv.DictReader(file)
+            employees = list(reader)
+
+        for emp in employees:
+            emp["salary"] = int(emp["salary"])
+
+        high_salary_employees = [
+            emp for emp in employees if emp["salary"] > 50000
+        ]
+
+        salaries = [emp["salary"] for emp in employees]
+        avg_salary = sum(salaries) / len(salaries)
+
+        print("All Employees:")
+        for emp in employees:
+            print(emp)
+
+        print("\nEmployees with salary > 50000:")
+        for emp in high_salary_employees:
+            print(emp)
+
+        print("\nAverage Salary:", avg_salary)
+
+    except FileNotFoundError:
+        print("employees.csv file not found")
+    except Exception as e:
+        print("Error:", e)
+
+process_csv()
+```
+## Output:
+<img width="1459" height="264" alt="image" src="https://github.com/user-attachments/assets/45399ae4-f4c2-423a-a93d-106ac81b6463" />
+
+
+## EX 45 : Expense Tracker
+
+## Code:
+```
+import csv
+from datetime import datetime
+
+def expense_tracker():
+    try:
+        with open("expenses.csv", "r") as file:
+            reader = csv.DictReader(file)
+            expenses = list(reader)
+
+        current_month = datetime.now().month
+        current_year = datetime.now().year
+
+        for exp in expenses:
+            exp["amount"] = float(exp["amount"])
+
+        filtered_expenses = [
+            exp for exp in expenses
+            if datetime.strptime(exp["date"], "%Y-%m-%d").month == current_month
+            and datetime.strptime(exp["date"], "%Y-%m-%d").year == current_year
+        ]
+
+        category_totals = {}
+
+        for exp in filtered_expenses:
+            cat = exp["category"]
+            category_totals[cat] = category_totals.get(cat, 0) + exp["amount"]
+
+        print("Filtered Expenses (Current Month):")
+        for exp in filtered_expenses:
+            print(exp)
+
+        print("\nCategory-wise Total:")
+        for cat, total in category_totals.items():
+            print(cat, ":", total)
+
+    except FileNotFoundError:
+        print("expenses.csv file not found")
+    except Exception as e:
+        print("Error:", e)
+
+expense_tracker()
+```
+## Output:
+<img width="1442" height="291" alt="image" src="https://github.com/user-attachments/assets/e2da9ae7-a13a-4ebc-ad11-b06280c4413c" />
+
+
+## EX 37 : Multiple Instances
+
+## Code:
+```
+class Employee:
+    def __init__(self, name, emp_id):
+        self.name = name
+        self.emp_id = emp_id
+
+    def display(self):
+        return f"Name: {self.name}, ID: {self.emp_id}"
+
+
+def main():
+    emp1 = Employee("Santhiya", 101)
+    emp2 = Employee("Arun", 102)
+    emp3 = Employee("Meena", 103)
+
+    employees = [emp1, emp2, emp3]
+
+    for emp in employees:
+        print(emp.display())
+
+
+main()
+
+```
+## Output:
+<img width="1458" height="169" alt="image" src="https://github.com/user-attachments/assets/755e25ec-9273-47a5-898e-bf190029bce7" />
+
+## EX 37 : Multiple Instances
+
+## Code:
+```
+class Employee:
+    def __init__(self, name, emp_id):
+        self.name = name
+        self.emp_id = emp_id
+
+    def display(self):
+        return f"Name: {self.name}, ID: {self.emp_id}"
+
+
+def main():
+    emp1 = Employee("Santhiya", 101)
+    emp2 = Employee("Arun", 102)
+    emp3 = Employee("Meena", 103)
+
+    employees = [emp1, emp2, emp3]
+
+    for emp in employees:
+        print(emp.display())
+
+
+main()
+
+```
+## Output:
+<img width="1458" height="169" alt="image" src="https://github.com/user-attachments/assets/755e25ec-9273-47a5-898e-bf190029bce7" />
+
+## EX 37 : Multiple Instances
+
+## Code:
+```
+class Employee:
+    def __init__(self, name, emp_id):
+        self.name = name
+        self.emp_id = emp_id
+
+    def display(self):
+        return f"Name: {self.name}, ID: {self.emp_id}"
+
+
+def main():
+    emp1 = Employee("Santhiya", 101)
+    emp2 = Employee("Arun", 102)
+    emp3 = Employee("Meena", 103)
+
+    employees = [emp1, emp2, emp3]
+
+    for emp in employees:
+        print(emp.display())
+
+
+main()
+
+```
+## Output:
+<img width="1458" height="169" alt="image" src="https://github.com/user-attachments/assets/755e25ec-9273-47a5-898e-bf190029bce7" />
+
+## EX 37 : Multiple Instances
+
+## Code:
+```
+class Employee:
+    def __init__(self, name, emp_id):
+        self.name = name
+        self.emp_id = emp_id
+
+    def display(self):
+        return f"Name: {self.name}, ID: {self.emp_id}"
+
+
+def main():
+    emp1 = Employee("Santhiya", 101)
+    emp2 = Employee("Arun", 102)
+    emp3 = Employee("Meena", 103)
+
+    employees = [emp1, emp2, emp3]
+
+    for emp in employees:
+        print(emp.display())
+
+
+main()
+
+```
+## Output:
+<img width="1458" height="169" alt="image" src="https://github.com/user-attachments/assets/755e25ec-9273-47a5-898e-bf190029bce7" />
+
+## EX 37 : Multiple Instances
+
+## Code:
+```
+class Employee:
+    def __init__(self, name, emp_id):
+        self.name = name
+        self.emp_id = emp_id
+
+    def display(self):
+        return f"Name: {self.name}, ID: {self.emp_id}"
+
+
+def main():
+    emp1 = Employee("Santhiya", 101)
+    emp2 = Employee("Arun", 102)
+    emp3 = Employee("Meena", 103)
+
+    employees = [emp1, emp2, emp3]
+
+    for emp in employees:
+        print(emp.display())
+
+
+main()
+
+```
+## Output:
+<img width="1458" height="169" alt="image" src="https://github.com/user-attachments/assets/755e25ec-9273-47a5-898e-bf190029bce7" />
+
+## EX 37 : Multiple Instances
+
+## Code:
+```
+class Employee:
+    def __init__(self, name, emp_id):
+        self.name = name
+        self.emp_id = emp_id
+
+    def display(self):
+        return f"Name: {self.name}, ID: {self.emp_id}"
+
+
+def main():
+    emp1 = Employee("Santhiya", 101)
+    emp2 = Employee("Arun", 102)
+    emp3 = Employee("Meena", 103)
+
+    employees = [emp1, emp2, emp3]
+
+    for emp in employees:
+        print(emp.display())
+
+
+main()
+
+```
+## Output:
+<img width="1458" height="169" alt="image" src="https://github.com/user-attachments/assets/755e25ec-9273-47a5-898e-bf190029bce7" />
+
+## EX 37 : Multiple Instances
+
+## Code:
+```
+class Employee:
+    def __init__(self, name, emp_id):
+        self.name = name
+        self.emp_id = emp_id
+
+    def display(self):
+        return f"Name: {self.name}, ID: {self.emp_id}"
+
+
+def main():
+    emp1 = Employee("Santhiya", 101)
+    emp2 = Employee("Arun", 102)
+    emp3 = Employee("Meena", 103)
+
+    employees = [emp1, emp2, emp3]
+
+    for emp in employees:
+        print(emp.display())
+
+
+main()
+
+```
+## Output:
+<img width="1458" height="169" alt="image" src="https://github.com/user-attachments/assets/755e25ec-9273-47a5-898e-bf190029bce7" />
+
+## EX 37 : Multiple Instances
+
+## Code:
+```
+class Employee:
+    def __init__(self, name, emp_id):
+        self.name = name
+        self.emp_id = emp_id
+
+    def display(self):
+        return f"Name: {self.name}, ID: {self.emp_id}"
+
+
+def main():
+    emp1 = Employee("Santhiya", 101)
+    emp2 = Employee("Arun", 102)
+    emp3 = Employee("Meena", 103)
+
+    employees = [emp1, emp2, emp3]
+
+    for emp in employees:
+        print(emp.display())
+
+
+main()
+
+```
+## Output:
+<img width="1458" height="169" alt="image" src="https://github.com/user-attachments/assets/755e25ec-9273-47a5-898e-bf190029bce7" />
+
+## EX 37 : Multiple Instances
+
+## Code:
+```
+class Employee:
+    def __init__(self, name, emp_id):
+        self.name = name
+        self.emp_id = emp_id
+
+    def display(self):
+        return f"Name: {self.name}, ID: {self.emp_id}"
+
+
+def main():
+    emp1 = Employee("Santhiya", 101)
+    emp2 = Employee("Arun", 102)
+    emp3 = Employee("Meena", 103)
+
+    employees = [emp1, emp2, emp3]
+
+    for emp in employees:
+        print(emp.display())
+
+
+main()
+
+```
+## Output:
+<img width="1458" height="169" alt="image" src="https://github.com/user-attachments/assets/755e25ec-9273-47a5-898e-bf190029bce7" />
+
+## EX 37 : Multiple Instances
+
+## Code:
+```
+class Employee:
+    def __init__(self, name, emp_id):
+        self.name = name
+        self.emp_id = emp_id
+
+    def display(self):
+        return f"Name: {self.name}, ID: {self.emp_id}"
+
+
+def main():
+    emp1 = Employee("Santhiya", 101)
+    emp2 = Employee("Arun", 102)
+    emp3 = Employee("Meena", 103)
+
+    employees = [emp1, emp2, emp3]
+
+    for emp in employees:
+        print(emp.display())
+
+
+main()
+
+```
+## Output:
+<img width="1458" height="169" alt="image" src="https://github.com/user-attachments/assets/755e25ec-9273-47a5-898e-bf190029bce7" />
 
 
 
