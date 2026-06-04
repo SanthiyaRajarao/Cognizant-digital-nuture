@@ -1,345 +1,463 @@
-# ANSI SQL Using MySQL Exercises Answers
+# ANSI SQL Using MySQL – 25 SQL Practice Questions
 
-**Prepared By:** SANTHIYA R
+This repository contains solutions for 25 ANSI SQL practice questions based on an Event Management Database schema consisting of:
 
-**College:** Saveetha Engineering College  
+- Users
+- Events
+- Sessions
+- Registrations
+- Feedback
+- Resources
 
-**Department:** B.Tech AI & DS – III Year
+The exercises cover SQL concepts such as:
+
+- Joins
+- Aggregation
+- GROUP BY
+- HAVING
+- Subqueries
+- CTEs
+- Date Functions
+- Window Analysis
+- Data Validation
+- Reporting Queries
 
 ---
 
-# 1. User Upcoming Events
+# Samlpe DataSet
 
-## Question
-Show a list of all upcoming events a user is registered for in their city, sorted by date.
+## Crete Table:
+### Code:
+```
 
-## Answer
 
-```sql
-SELECT u.full_name,
-       e.title,
-       e.city,
-       e.start_date
+CREATE TABLE Users (
+    user_id INT PRIMARY KEY AUTO_INCREMENT,
+    full_name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    city VARCHAR(100) NOT NULL,
+    registration_date DATE NOT NULL
+);
+
+CREATE TABLE Events (
+    event_id INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(200) NOT NULL,
+    description TEXT,
+    city VARCHAR(100) NOT NULL,
+    start_date DATETIME NOT NULL,
+    end_date DATETIME NOT NULL,
+    status ENUM('upcoming','completed','cancelled'),
+    organizer_id INT,
+    FOREIGN KEY (organizer_id) REFERENCES Users(user_id)
+);
+
+CREATE TABLE Sessions (
+    session_id INT PRIMARY KEY AUTO_INCREMENT,
+    event_id INT,
+    title VARCHAR(200) NOT NULL,
+    speaker_name VARCHAR(100) NOT NULL,
+    start_time DATETIME NOT NULL,
+    end_time DATETIME NOT NULL,
+    FOREIGN KEY (event_id) REFERENCES Events(event_id)
+);
+
+CREATE TABLE Registrations (
+    registration_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT,
+    event_id INT,
+    registration_date DATE NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id),
+    FOREIGN KEY (event_id) REFERENCES Events(event_id)
+);
+
+CREATE TABLE Feedback (
+    feedback_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT,
+    event_id INT,
+    rating INT CHECK (rating BETWEEN 1 AND 5),
+    comments TEXT,
+    feedback_date DATE NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id),
+    FOREIGN KEY (event_id) REFERENCES Events(event_id)
+);
+
+CREATE TABLE Resources (
+    resource_id INT PRIMARY KEY AUTO_INCREMENT,
+    event_id INT,
+    resource_type ENUM('pdf','image','link'),
+    resource_url VARCHAR(255) NOT NULL,
+    uploaded_at DATETIME NOT NULL,
+    FOREIGN KEY (event_id) REFERENCES Events(event_id)
+);
+```
+### Output:
+<img width="1600" height="258" alt="WhatsApp Image 2026-06-03 at 9 31 02 PM" src="https://github.com/user-attachments/assets/38864013-1bbf-4004-b9e2-d1f83a887c6c" />
+
+## Insert Data
+### Code:
+```
+INSERT INTO Users (user_id, full_name, email, city, registration_date) VALUES
+(1, 'Alice Johnson', 'alice@example.com', 'New York', '2024-12-01'),
+(2, 'Bob Smith', 'bob@example.com', 'Los Angeles', '2024-12-05'),
+(3, 'Charlie Lee', 'charlie@example.com', 'Chicago', '2024-12-10'),
+(4, 'Diana King', 'diana@example.com', 'New York', '2025-01-15'),
+(5, 'Ethan Hunt', 'ethan@example.com', 'Los Angeles', '2025-02-01');
+
+INSERT INTO Events
+(event_id, title, description, city, start_date, end_date, status, organizer_id)
+VALUES
+(1,
+'Tech Innovators Meetup',
+'A meetup for tech enthusiasts.',
+'New York',
+'2025-06-10 10:00:00',
+'2025-06-10 16:00:00',
+'upcoming',
+1),
+
+(2,
+'AI & ML Conference',
+'Conference on AI and ML advancements.',
+'Chicago',
+'2025-05-15 09:00:00',
+'2025-05-15 17:00:00',
+'completed',
+3),
+
+(3,
+'Frontend Development Bootcamp',
+'Hands-on training on frontend tech.',
+'Los Angeles',
+'2025-07-01 10:00:00',
+'2025-07-03 16:00:00',
+'upcoming',
+2);
+
+INSERT INTO Sessions
+(session_id, event_id, title, speaker_name, start_time, end_time)
+VALUES
+(1,
+1,
+'Opening Keynote',
+'Dr. Tech',
+'2025-06-10 10:00:00',
+'2025-06-10 11:00:00'),
+
+(2,
+1,
+'Future of Web Dev',
+'Alice Johnson',
+'2025-06-10 11:15:00',
+'2025-06-10 12:30:00'),
+
+(3,
+2,
+'AI in Healthcare',
+'Charlie Lee',
+'2025-05-15 09:30:00',
+'2025-05-15 11:00:00'),
+
+(4,
+3,
+'Intro to HTML5',
+'Bob Smith',
+'2025-07-01 10:00:00',
+'2025-07-01 12:00:00');
+
+INSERT INTO Registrations
+(registration_id, user_id, event_id, registration_date)
+VALUES
+(1, 1, 1, '2025-05-01'),
+(2, 2, 1, '2025-05-02'),
+(3, 3, 2, '2025-04-30'),
+(4, 4, 2, '2025-04-28'),
+(5, 5, 3, '2025-06-15');
+
+INSERT INTO Feedback
+(feedback_id, user_id, event_id, rating, comments, feedback_date)
+VALUES
+(1,
+3,
+2,
+4,
+'Great insights!',
+'2025-05-16'),
+
+(2,
+4,
+2,
+5,
+'Very informative.',
+'2025-05-16'),
+
+(3,
+2,
+1,
+3,
+'Could be better.',
+'2025-06-11');
+
+INSERT INTO Resources
+(resource_id, event_id, resource_type, resource_url, uploaded_at)
+VALUES
+(1,
+1,
+'pdf',
+'https://portal.com/resources/tech_meetup_agenda.pdf',
+'2025-05-01 10:00:00'),
+
+(2,
+2,
+'image',
+'https://portal.com/resources/ai_poster.jpg',
+'2025-04-20 09:00:00'),
+
+(3,
+3,
+'link',
+'https://portal.com/resources/html5_docs',
+'2025-06-25 15:00:00');
+```
+### Output
+<img width="1600" height="251" alt="WhatsApp Image 2026-06-03 at 9 32 41 PM" src="https://github.com/user-attachments/assets/9727f1d0-5841-4fcd-980f-3e39f643ed72" />
+
+# SQL Exercises
+
+## 1. User Upcoming Events
+### Problem Statement
+List the top 5 users who have submitted the most feedback entries.
+### Query
+```
+SELECT u.full_name, e.title, e.city, e.start_date
 FROM Users u
 JOIN Registrations r ON u.user_id = r.user_id
 JOIN Events e ON r.event_id = e.event_id
 WHERE e.status = 'upcoming'
-  AND u.city = e.city
+AND u.city = e.city
 ORDER BY e.start_date;
 ```
-# Output
-<img width="1608" height="184" alt="image" src="https://github.com/user-attachments/assets/24840fad-1d8b-43d2-b627-825373563e32" />
+### Output
+<img width="941" height="348" alt="WhatsApp Image 2026-06-03 at 2 08 23 PM" src="https://github.com/user-attachments/assets/8db1b83d-db35-4ea3-b429-0eb0edd85c69" />
 
-
-# 2. Top Rated Events
-
-## Question
-Identify events with the highest average rating, considering only those that have received at least 10 feedback submissions.
-
-## Answer
-
-```sql
-SELECT e.event_id,
-       e.title,
-       AVG(f.rating) AS avg_rating,
-       COUNT(*) AS feedback_count
+## 2. Top Rated Events
+### Problem Statement
+Identify events with the highest average rating, considering only those that have received at 
+least 10 feedback submissions.
+### Query
+```
+SELECT e.event_id, e.title, AVG(f.rating) AS avg_rating
 FROM Events e
 JOIN Feedback f ON e.event_id = f.event_id
 GROUP BY e.event_id, e.title
-HAVING COUNT(*) >= 10
+HAVING COUNT(f.feedback_id) >= 10
 ORDER BY avg_rating DESC;
 ```
-# Output
-<img width="1608" height="114" alt="image" src="https://github.com/user-attachments/assets/996968da-264a-4ba1-83b2-ce803ad5fb1d" />
+### Output
+Empty Set
+<img width="942" height="357" alt="WhatsApp Image 2026-06-03 at 2 08 49 PM" src="https://github.com/user-attachments/assets/1615ac40-3d59-414a-9690-ccd4669ec8a6" />
 
----
-
-# 3. Inactive Users
-
-## Question
+## 3. Inactive Users
+### Problem Statement
 Retrieve users who have not registered for any events in the last 90 days.
-
-## Answer
-
-```sql
-SELECT *
-FROM Users
-WHERE user_id NOT IN (
-    SELECT DISTINCT user_id
-    FROM Registrations
-    WHERE registration_date >= CURDATE() - INTERVAL 90 DAY
-);
+### Query
 ```
-# Output
-<img width="1891" height="346" alt="image" src="https://github.com/user-attachments/assets/31f0880b-3c75-493a-b431-b7893f6b890a" />
+SELECT u.*
+FROM Users u
+LEFT JOIN Registrations r
+ON u.user_id = r.user_id
+AND r.registration_date >= CURDATE() - INTERVAL 90 DAY
+WHERE r.registration_id IS NULL;
+```
+### Output
+<img width="931" height="328" alt="WhatsApp Image 2026-06-03 at 2 10 33 PM" src="https://github.com/user-attachments/assets/fe82cf71-5307-4e33-bde8-cc6cc851de29" />
 
----
-
-# 4. Peak Session Hours
-
-## Question
-Count how many sessions are scheduled between 10 AM to 12 PM for each event.
-
-## Answer
-
-```sql
-SELECT e.event_id,
-       e.title,
-       COUNT(s.session_id) AS session_count
+## 4. Peak Session Hours
+### Problem Statement
+Count how many sessions are scheduled between 10 AM to 12 PM for each event. 
+### Query
+```
+SELECT e.title,
+COUNT(s.session_id) AS session_count
 FROM Events e
 LEFT JOIN Sessions s
 ON e.event_id = s.event_id
-AND TIME(s.start_time) BETWEEN '10:00:00' AND '12:00:00'
+WHERE TIME(s.start_time) BETWEEN '10:00:00' AND '12:00:00'
 GROUP BY e.event_id, e.title;
 ```
-# Output
-<img width="1606" height="237" alt="image" src="https://github.com/user-attachments/assets/750a6068-1a12-4f59-b432-07ca88c6ed02" />
+### Output
+<img width="935" height="341" alt="WhatsApp Image 2026-06-03 at 2 27 34 PM" src="https://github.com/user-attachments/assets/2443300d-6bde-400b-aa61-75bacb43bcf0" />
 
----
-
-# 5. Most Active Cities
-
-## Question
+## 5. Most Active Cities
+### Problem Statement
 List the top 5 cities with the highest number of distinct user registrations.
-
-## Answer
-
-```sql
+### Query
+```
 SELECT u.city,
-       COUNT(DISTINCT r.registration_id) AS total_registrations
+COUNT(DISTINCT r.user_id) AS registrations
 FROM Users u
-JOIN Registrations r ON u.user_id = r.user_id
+JOIN Registrations r
+ON u.user_id = r.user_id
 GROUP BY u.city
-ORDER BY total_registrations DESC
+ORDER BY registrations DESC
 LIMIT 5;
 ```
-# Output
-<img width="1606" height="234" alt="image" src="https://github.com/user-attachments/assets/1391aea4-50cd-47a0-8e9b-64df3a2959e9" />
+### Output
+<img width="931" height="324" alt="WhatsApp Image 2026-06-03 at 2 37 22 PM" src="https://github.com/user-attachments/assets/d82d19e8-ce58-4d25-8dc3-7d779a1f87c7" />
 
----
-# 6. Event Resource Summary
-
-## Question
-
-Generate a report showing the number of resources (PDFs, Images, Links) uploaded for each event.
-
-## Answer
-
-```sql
-SELECT e.event_id,
-       e.title,
-       COUNT(CASE WHEN r.resource_type='pdf' THEN 1 END) AS pdf_count,
-       COUNT(CASE WHEN r.resource_type='image' THEN 1 END) AS image_count,
-       COUNT(CASE WHEN r.resource_type='link' THEN 1 END) AS link_count
+## 6. Event Resource Summary
+### Problem Statement
+### Query
+```
+SELECT e.title,
+SUM(CASE WHEN r.resource_type='pdf' THEN 1 ELSE 0 END) AS pdf_count,
+SUM(CASE WHEN r.resource_type='image' THEN 1 ELSE 0 END) AS image_count,
+SUM(CASE WHEN r.resource_type='link' THEN 1 ELSE 0 END) AS link_count
 FROM Events e
-LEFT JOIN Resources r ON e.event_id = r.event_id
+LEFT JOIN Resources r
+ON e.event_id = r.event_id
 GROUP BY e.event_id, e.title;
 ```
-# Output
-<img width="1609" height="238" alt="image" src="https://github.com/user-attachments/assets/a30e3e8b-d748-45fc-9531-c5c8504a1693" />
+### Output
+<img width="929" height="320" alt="image" src="https://github.com/user-attachments/assets/5e5af296-a074-43b1-9e07-7785aab4fe2c" />
 
----
 
-# 7. Low Feedback Alerts
-
-## Question
-
-List all users who gave feedback with a rating less than 3, along with their comments and associated event names.
-
-## Answer
-
-```sql
+## 7. Low Feedback Alerts
+### Problem Statement
+### Query
+```
 SELECT u.full_name,
-       e.title AS event_name,
-       f.rating,
-       f.comments
+f.comments,
+e.title
 FROM Feedback f
 JOIN Users u ON f.user_id = u.user_id
 JOIN Events e ON f.event_id = e.event_id
 WHERE f.rating < 3;
+
 ```
-# Output
-<img width="1610" height="102" alt="image" src="https://github.com/user-attachments/assets/6deea930-b43e-40e9-be1f-63607d2249f9" />
+### Output
+<img width="938" height="332" alt="WhatsApp Image 2026-06-03 at 5 20 00 PM" src="https://github.com/user-attachments/assets/1dc176b5-9312-4e07-8f89-6176d8e84901" />
 
----
-
-# 8. Sessions per Upcoming Event
-
-## Question
-
-Display all upcoming events with the count of sessions scheduled for them.
-
-## Answer
-
-```sql
-SELECT e.event_id,
-       e.title,
-       COUNT(s.session_id) AS session_count
+## 8. Sessions per Upcoming Event
+### Problem Statement
+### Query
+```
+SELECT e.title,
+COUNT(s.session_id) AS total_sessions
 FROM Events e
-LEFT JOIN Sessions s ON e.event_id = s.event_id
-WHERE e.status = 'upcoming'
+LEFT JOIN Sessions s
+ON e.event_id = s.event_id
+WHERE e.status='upcoming'
 GROUP BY e.event_id, e.title;
 ```
-# Output
-<img width="1615" height="186" alt="image" src="https://github.com/user-attachments/assets/5098694c-9259-427d-a8e1-a96e20910c26" />
+### Output
+<img width="936" height="318" alt="WhatsApp Image 2026-06-03 at 5 20 56 PM" src="https://github.com/user-attachments/assets/a997e599-ab28-4959-8616-129a749f04b7" />
 
----
-
-# 9. Organizer Event Summary
-
-## Question
-
-For each event organizer, show the number of events created and their current status.
-
-## Answer
-
-```sql
-SELECT u.user_id,
-       u.full_name,
-       e.status,
-       COUNT(e.event_id) AS total_events
+## 9. Organizer Event Summary
+### Problem Statement
+### Query
+```
+SELECT u.full_name,
+e.status,
+COUNT(e.event_id) AS total_events
 FROM Users u
-JOIN Events e ON u.user_id = e.organizer_id
-GROUP BY u.user_id, u.full_name, e.status;
+JOIN Events e
+ON u.user_id = e.organizer_id
+GROUP BY u.full_name, e.status;
 ```
-# Output
-<img width="1614" height="239" alt="image" src="https://github.com/user-attachments/assets/e6614c11-17c5-47c4-8db3-7fd50986ba22" />
+### Output
+<img width="935" height="328" alt="WhatsApp Image 2026-06-03 at 5 21 45 PM" src="https://github.com/user-attachments/assets/2fbf0424-7162-45f4-905c-758d4e7014d3" />
 
----
-
-# 10. Feedback Gap
-
-## Question
-
-Identify events that had registrations but received no feedback at all.
-
-## Answer
-
-```sql
-SELECT e.event_id,
-       e.title
+## 10. Feedback Gap
+### Problem Statement
+### Query
+```
+SELECT DISTINCT e.title
 FROM Events e
-WHERE EXISTS (
-      SELECT 1
-      FROM Registrations r
-      WHERE r.event_id = e.event_id
-)
-AND NOT EXISTS (
-      SELECT 1
-      FROM Feedback f
-      WHERE f.event_id = e.event_id
-);
+JOIN Registrations r
+ON e.event_id = r.event_id
+LEFT JOIN Feedback f
+ON e.event_id = f.event_id
+WHERE f.feedback_id IS NULL;
 ```
-# Output
-<img width="1616" height="142" alt="image" src="https://github.com/user-attachments/assets/3b9affb7-d988-447e-ad4a-729c303423a6" />
+### Output
+<img width="938" height="330" alt="WhatsApp Image 2026-06-03 at 5 22 52 PM" src="https://github.com/user-attachments/assets/70ab05fe-5ba0-444b-a91e-c832a39cda6d" />
 
----
-
-# 11. Daily New User Count
-
-## Question
-
-Find the number of users who registered each day in the last 7 days.
-
-## Answer
-
-```sql
+## 11. Daily New User Count
+### Problem Statement
+### Query
+```
 SELECT registration_date,
-       COUNT(*) AS new_users
+COUNT(*) AS new_users
 FROM Users
 WHERE registration_date >= CURDATE() - INTERVAL 7 DAY
 GROUP BY registration_date
 ORDER BY registration_date;
 ```
-# Output
-<img width="1615" height="98" alt="image" src="https://github.com/user-attachments/assets/9828d8e6-d1f2-4a00-943b-b57f0a02ef7f" />
+### Output
+<img width="940" height="327" alt="WhatsApp Image 2026-06-03 at 5 24 41 PM" src="https://github.com/user-attachments/assets/734bc102-7493-4947-98d2-4d46f2cc4b21" />
 
----
-
-# 12. Event with Maximum Sessions
-
-## Question
-
-List the event(s) with the highest number of sessions.
-
-## Answer
-
-```sql
-SELECT e.event_id,
-       e.title,
-       COUNT(s.session_id) AS session_count
+## 12. Event with Maximum Sessions
+### Problem Statement
+### Query
+```
+SELECT e.title,
+COUNT(s.session_id) AS total_sessions
 FROM Events e
-JOIN Sessions s ON e.event_id = s.event_id
+JOIN Sessions s
+ON e.event_id = s.event_id
 GROUP BY e.event_id, e.title
-HAVING COUNT(s.session_id) = (
-    SELECT MAX(session_total)
-    FROM (
-        SELECT COUNT(*) AS session_total
-        FROM Sessions
-        GROUP BY event_id
-    ) x
+HAVING COUNT(s.session_id) =
+(
+SELECT MAX(session_count)
+FROM
+(
+SELECT COUNT(*) AS session_count
+FROM Sessions
+GROUP BY event_id
+) t
 );
 ```
-# Output
-<img width="1606" height="134" alt="image" src="https://github.com/user-attachments/assets/55f57354-d7fe-4239-9b3c-140ec7f98636" />
+### Output
+<img width="931" height="324" alt="WhatsApp Image 2026-06-03 at 5 25 30 PM" src="https://github.com/user-attachments/assets/d8d17415-5ec8-4024-b1b9-05e51622ba89" />
 
----
-
-# 13. Average Rating per City
-
-## Question
-
-Calculate the average feedback rating of events conducted in each city.
-
-## Answer
-
-```sql
+## 13. Average Rating per City
+### Problem Statement
+### Query
+```
 SELECT e.city,
-       ROUND(AVG(f.rating),2) AS avg_rating
+AVG(f.rating) AS avg_rating
 FROM Events e
-JOIN Feedback f ON e.event_id = f.event_id
+JOIN Feedback f
+ON e.event_id = f.event_id
 GROUP BY e.city;
 ```
-# Output
-<img width="1617" height="185" alt="image" src="https://github.com/user-attachments/assets/0e04514c-42d1-4cf8-bd29-d155663a1654" />
+### Output
+<img width="951" height="326" alt="WhatsApp Image 2026-06-03 at 5 26 21 PM" src="https://github.com/user-attachments/assets/347b6d2a-c60a-49ec-a2f9-5a49cb48890d" />
 
----
-
-# 14. Most Registered Events
-
-## Question
-
-List top 3 events based on the total number of user registrations.
-
-## Answer
-
-```sql
-SELECT e.event_id,
-       e.title,
-       COUNT(r.registration_id) AS total_registrations
+## 14. Most Registered Events
+### Problem Statement
+### Query
+```
+SELECT e.title,
+COUNT(r.registration_id) AS total_registrations
 FROM Events e
-JOIN Registrations r ON e.event_id = r.event_id
+JOIN Registrations r
+ON e.event_id = r.event_id
 GROUP BY e.event_id, e.title
 ORDER BY total_registrations DESC
 LIMIT 3;
 ```
-# Output
-<img width="1610" height="239" alt="image" src="https://github.com/user-attachments/assets/1931e26c-a03d-40eb-95bf-99d2a6edc74d" />
+### Output
+<img width="937" height="329" alt="WhatsApp Image 2026-06-03 at 5 27 22 PM" src="https://github.com/user-attachments/assets/b98d3016-3005-497f-8c7c-eeedacd60df7" />
 
----
-
-# 15. Event Session Time Conflict
-
-## Question
-
-Identify overlapping sessions within the same event.
-
-## Answer
-
-```sql
-SELECT s1.event_id,
-       s1.session_id AS session_1,
-       s2.session_id AS session_2
+## 15. Event Session Time Conflict
+### Problem Statement
+### Query
+```
+SELECT
+s1.event_id,
+s1.title AS session1,
+s2.title AS session2
 FROM Sessions s1
 JOIN Sessions s2
 ON s1.event_id = s2.event_id
@@ -347,227 +465,163 @@ AND s1.session_id < s2.session_id
 AND s1.start_time < s2.end_time
 AND s1.end_time > s2.start_time;
 ```
-# Output
-<img width="1622" height="107" alt="image" src="https://github.com/user-attachments/assets/484c1dd8-e824-47c9-9aa5-e250f5641759" />
+### Output
+<img width="940" height="336" alt="WhatsApp Image 2026-06-03 at 5 28 24 PM" src="https://github.com/user-attachments/assets/e59f7e7b-21a7-44d7-82b7-3ad6f3c3cc73" />
 
----
-# 16. Unregistered Active Users
-
-## Question
-
-Find users who created an account in the last 30 days but haven’t registered for any events.
-
-## Answer
-
-```sql
+## 16. Unregistered Active Users
+### Problem Statement
+### Query
+```
 SELECT u.*
 FROM Users u
-LEFT JOIN Registrations r ON u.user_id = r.user_id
+LEFT JOIN Registrations r
+ON u.user_id = r.user_id
 WHERE u.registration_date >= CURDATE() - INTERVAL 30 DAY
 AND r.registration_id IS NULL;
 ```
-# Output
-<img width="1617" height="107" alt="image" src="https://github.com/user-attachments/assets/bdc200da-c26d-4756-bc67-efadd3d7bf7c" />
+### Output
+<img width="935" height="328" alt="WhatsApp Image 2026-06-03 at 5 29 04 PM" src="https://github.com/user-attachments/assets/2dd05ed1-301a-46db-b3e6-41f74860476a" />
 
----
-
-# 17. Multi-Session Speakers
-
-## Question
-
-Identify speakers who are handling more than one session across all events.
-
-## Answer
-
-```sql
+## 17. Multi-Session Speakers
+### Problem Statement
+### Query
+```
 SELECT speaker_name,
-       COUNT(*) AS total_sessions
+COUNT(*) AS total_sessions
 FROM Sessions
 GROUP BY speaker_name
 HAVING COUNT(*) > 1;
 ```
-# Output
-<img width="1616" height="115" alt="image" src="https://github.com/user-attachments/assets/8fc0cb14-393f-41be-b9d7-27dd46385a88" />
 
----
-
-# 18. Resource Availability Check
-
-## Question
-
-List all events that do not have any resources uploaded.
-
-## Answer
-
-```sql
-SELECT e.event_id,
-       e.title
+## 18. Resource Availability Check
+### Problem Statement
+### Query
+```
+SELECT e.title
 FROM Events e
-LEFT JOIN Resources r ON e.event_id = r.event_id
+LEFT JOIN Resources r
+ON e.event_id = r.event_id
 WHERE r.resource_id IS NULL;
 ```
-# Output
-<img width="1618" height="115" alt="image" src="https://github.com/user-attachments/assets/a0ebc458-9a9b-47c8-981f-aea41415b635" />
+### Output
+<img width="926" height="332" alt="WhatsApp Image 2026-06-03 at 5 30 50 PM" src="https://github.com/user-attachments/assets/f8b199cb-3a05-470a-be44-72f1d6b43dd2" />
 
----
-
-# 19. Completed Events with Feedback Summary
-
-## Question
-
-For completed events, show total registrations and average feedback rating.
-
-## Answer
-
-```sql
-SELECT e.event_id,
-       e.title,
-       COUNT(DISTINCT r.registration_id) AS total_registrations,
-       ROUND(AVG(f.rating),2) AS avg_rating
+## 19. Completed Events with Feedback Summary
+### Problem Statement
+### Query
+```
+SELECT
+e.title,
+COUNT(DISTINCT r.registration_id) AS total_registrations,
+AVG(f.rating) AS average_rating
 FROM Events e
-LEFT JOIN Registrations r ON e.event_id = r.event_id
-LEFT JOIN Feedback f ON e.event_id = f.event_id
-WHERE e.status = 'completed'
+LEFT JOIN Registrations r
+ON e.event_id = r.event_id
+LEFT JOIN Feedback f
+ON e.event_id = f.event_id
+WHERE e.status='completed'
 GROUP BY e.event_id, e.title;
 ```
-# Output
-<img width="1612" height="132" alt="image" src="https://github.com/user-attachments/assets/39fdf336-6feb-4d25-871d-446fe37cb710" />
+### Output
+<img width="931" height="329" alt="WhatsApp Image 2026-06-03 at 5 33 05 PM" src="https://github.com/user-attachments/assets/fe38c283-8dd4-49b2-96b6-371f0699ec34" />
 
----
-
-# 20. User Engagement Index
-
-## Question
-
-For each user, calculate how many events they attended and how many feedbacks they submitted.
-
-## Answer
-
-```sql
-SELECT u.user_id,
-       u.full_name,
-       COUNT(DISTINCT r.event_id) AS attended_events,
-       COUNT(DISTINCT f.feedback_id) AS feedback_submitted
+## 20. User Engagement Index
+### Problem Statement
+### Query
+```
+SELECT
+u.full_name,
+COUNT(DISTINCT r.event_id) AS attended_events,
+COUNT(DISTINCT f.feedback_id) AS feedback_submitted
 FROM Users u
-LEFT JOIN Registrations r ON u.user_id = r.user_id
-LEFT JOIN Feedback f ON u.user_id = f.user_id
+LEFT JOIN Registrations r
+ON u.user_id = r.user_id
+LEFT JOIN Feedback f
+ON u.user_id = f.user_id
 GROUP BY u.user_id, u.full_name;
 ```
-# Output
-<img width="1900" height="355" alt="image" src="https://github.com/user-attachments/assets/84ac23df-5c42-4f7c-a846-b38d816bcb1a" />
+### Output
+<img width="925" height="328" alt="WhatsApp Image 2026-06-03 at 5 33 55 PM" src="https://github.com/user-attachments/assets/83b127a5-6181-4533-8659-7212c6756001" />
 
----
-
-# 21. Top Feedback Providers
-
-## Question
-
-List top 5 users who have submitted the most feedback entries.
-
-## Answer
-
-```sql
-SELECT u.user_id,
-       u.full_name,
-       COUNT(f.feedback_id) AS total_feedbacks
+## 21. Top Feedback Providers
+### Problem Statement
+### Query
+```
+SELECT
+u.full_name,
+COUNT(f.feedback_id) AS total_feedbacks
 FROM Users u
-JOIN Feedback f ON u.user_id = f.user_id
+JOIN Feedback f
+ON u.user_id = f.user_id
 GROUP BY u.user_id, u.full_name
 ORDER BY total_feedbacks DESC
 LIMIT 5;
 ```
-# Output
-<img width="1611" height="237" alt="image" src="https://github.com/user-attachments/assets/8815933d-41b3-431a-a016-c91245509b16" />
+### Output
+<img width="923" height="328" alt="WhatsApp Image 2026-06-03 at 5 35 40 PM" src="https://github.com/user-attachments/assets/99b9de2b-784e-4ac2-92f5-a9ef9189094d" />
 
----
-
-# 22. Duplicate Registrations Check
-
-## Question
-
-Detect if a user has been registered more than once for the same event.
-
-## Answer
-
-```sql
-SELECT user_id,
-       event_id,
-       COUNT(*) AS registration_count
+## 22. Duplicate Registrations Check
+### Problem Statement
+### Query
+```
+SELECT
+user_id,
+event_id,
+COUNT(*) AS duplicate_count
 FROM Registrations
 GROUP BY user_id, event_id
 HAVING COUNT(*) > 1;
 ```
-# Output
-<img width="1603" height="113" alt="image" src="https://github.com/user-attachments/assets/7bce5c31-94f3-4f7b-9757-c4eb20ebf8fb" />
+### Output
+<img width="931" height="337" alt="WhatsApp Image 2026-06-03 at 5 37 11 PM" src="https://github.com/user-attachments/assets/bf25607d-5eb8-45a1-b642-7225b4bcecf0" />
 
----
-
-# 23. Registration Trends
-
-## Question
-
-Show a month-wise registration count trend over the past 12 months.
-
-## Answer
-
-```sql
-SELECT DATE_FORMAT(registration_date,'%Y-%m') AS month,
-       COUNT(*) AS registration_count
+## 23. Registration Trends
+### Problem Statement
+### Query
+```
+SELECT
+YEAR(registration_date) AS year,
+MONTH(registration_date) AS month,
+COUNT(*) AS registration_count
 FROM Registrations
 WHERE registration_date >= CURDATE() - INTERVAL 12 MONTH
-GROUP BY DATE_FORMAT(registration_date,'%Y-%m')
-ORDER BY month;
+GROUP BY YEAR(registration_date),
+MONTH(registration_date)
+ORDER BY year, month;
 ```
-# Output
-<img width="1619" height="128" alt="image" src="https://github.com/user-attachments/assets/1ce64e8b-9f08-48e0-99b2-6d1258f07fb9" />
+### Output
+<img width="926" height="330" alt="WhatsApp Image 2026-06-03 at 5 39 34 PM" src="https://github.com/user-attachments/assets/830aa49c-0a53-4c56-ae32-af7b119e4980" />
 
----
-
-# 24. Average Session Duration per Event
-
-## Question
-
-Compute the average duration (in minutes) of sessions in each event.
-
-## Answer
-
-```sql
-SELECT e.event_id,
-       e.title,
-       ROUND(
-           AVG(
-               TIMESTAMPDIFF(
-                   MINUTE,
-                   s.start_time,
-                   s.end_time
-               )
-           ),2
-       ) AS avg_duration_minutes
+## 24. Average Session Duration per Event
+### Problem Statement
+### Query
+```
+SELECT
+e.title,
+AVG(
+TIMESTAMPDIFF(
+MINUTE,
+s.start_time,
+s.end_time
+)
+) AS avg_duration_minutes
 FROM Events e
-JOIN Sessions s ON e.event_id = s.event_id
+JOIN Sessions s
+ON e.event_id = s.event_id
 GROUP BY e.event_id, e.title;
 ```
-# Output
-<img width="1618" height="238" alt="image" src="https://github.com/user-attachments/assets/e8097de7-a236-49e0-93fd-c602f7c4ffc9" />
+### Output
+<img width="928" height="331" alt="WhatsApp Image 2026-06-03 at 5 40 26 PM" src="https://github.com/user-attachments/assets/ebb06b63-d69f-4efb-8044-185c11560998" />
 
----
-
-# 25. Events Without Sessions
-
-## Question
-
-List all events that currently have no sessions scheduled under them.
-
-## Answer
-
-```sql
-SELECT e.event_id,
-       e.title
+## 25. Events Without Sessions
+### Problem Statement
+### Query
+```
+SELECT e.title
 FROM Events e
-LEFT JOIN Sessions s ON e.event_id = s.event_id
+LEFT JOIN Sessions s
+ON e.event_id = s.event_id
 WHERE s.session_id IS NULL;
 ```
-# Output
-<img width="1612" height="115" alt="image" src="https://github.com/user-attachments/assets/bde2d587-adf0-47fa-a939-5a06f82ffae4" />
-
----
+### Output
+<img width="932" height="331" alt="WhatsApp Image 2026-06-03 at 5 41 07 PM" src="https://github.com/user-attachments/assets/e3c42469-d115-4cf4-b9e7-7bdd6cc1a09c" />
